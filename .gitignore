@@ -1,0 +1,20 @@
+# venv
+.venv/
+# python
+__pycache__/
+*.pyc
+# django
+*.sqlite3
+/staticfiles/
+/media/
+# tooling
+.env
+*.log
+var/*.log
+var/backups/
+# deps
+backend/requirements.txt
+backend/requirements-dev.txt
+# OS
+.DS_Store
+Thumbs.db
