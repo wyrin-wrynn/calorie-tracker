@@ -1,0 +1,89 @@
+{# templates/tracker/health.html #}
+{% extends "base.html" %}
+{% block title %}Health{% endblock %}
+{% block content %}
+  <div class="space-y-6">
+  
+    <!-- HTMX: replace content -->
+    <section class="rounded-2xl border bg-white p-6 shadow-sm">
+      <h2 class="text-lg font-semibold mb-2">HTMX: Replace</h2>
+      <p class="text-sm text-slate-600 mb-4">Fetch server time and replace the target.</p>
+      <div class="flex items-center gap-3">
+        <button
+          class="px-4 py-2 rounded-xl border bg-slate-900 text-white text-sm"
+          hx-get="{% url 'demo_ping' %}"
+          hx-target="#replace-target"
+          hx-swap="innerHTML"
+        >
+          Replace
+        </button>
+        <div id="replace-target" class="text-sm text-slate-500">Ready.</div>
+      </div>
+    </section>
+  
+    <!-- HTMX: prepend items -->
+    <section class="rounded-2xl border bg-white p-6 shadow-sm">
+      <h2 class="text-lg font-semibold mb-2">HTMX: Prepend</h2>
+      <p class="text-sm text-slate-600 mb-4">Each click prepends a new item at the top.</p>
+      <button
+        class="px-4 py-2 rounded-xl border text-sm"
+        hx-get="{% url 'demo_ping' %}"
+        hx-target="#prepend-target"
+        hx-swap="afterbegin"
+      >
+        Prepend
+      </button>
+      <div id="prepend-target" class="mt-4 space-y-2 text-sm">
+        <div class="text-slate-500">No items yet.</div>
+      </div>
+    </section>
+  
+    <!-- Alpine.js: local UI state -->
+    <section class="rounded-2xl border bg-white p-6 shadow-sm" x-data="{ open: false }">
+      <h2 class="text-lg font-semibold mb-2">Alpine: Toggle</h2>
+      <p class="text-sm text-slate-600 mb-4">Client-side show/hide without server round trip.</p>
+      <button @click="open = !open" class="px-4 py-2 rounded-xl border text-sm">
+        Toggle Panel
+      </button>
+      <div x-show="open" x-transition class="mt-4 rounded-xl border p-4 text-sm">
+        This panel is controlled by Alpine state (<code>open</code>).
+      </div>
+    </section>
+  
+    <!-- Flowbite modal + HTMX load -->
+    <section class="rounded-2xl border bg-white p-6 shadow-sm">
+      <h2 class="text-lg font-semibold mb-2">Flowbite Modal + HTMX</h2>
+      <p class="text-sm text-slate-600 mb-4">Open modal, then fetch content into it.</p>
+    
+      <div class="flex items-center gap-3">
+        <button data-modal-target="demoModal" data-modal-toggle="demoModal"
+                class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm">
+          Open Modal
+        </button>
+        <button
+          class="px-4 py-2 rounded-xl border text-sm"
+          hx-get="{% url 'demo_ping' %}"
+          hx-target="#modal-body"
+          hx-swap="innerHTML"
+        >
+          Load Into Modal
+        </button>
+      </div>
+    
+      <!-- Modal -->
+      <div id="demoModal" tabindex="-1" aria-hidden="true"
+           class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full flex items-center justify-center bg-black/50">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold">Demo Modal</h3>
+            <button data-modal-hide="demoModal" class="rounded border px-2 py-1 text-sm">Close</button>
+          </div>
+          <div id="modal-body" class="mt-4 text-sm text-slate-600">
+            Modal body. Click “Load Into Modal” to fetch server content.
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  </div>
+{% endblock %}

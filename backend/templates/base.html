@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Calorie Tracker{% endblock %}</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: {} } };</script>
+
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+
+  <!-- Alpine (optional) -->
+  <script src="https://unpkg.com/alpinejs" defer></script>
+
+  <!-- CSRF for HTMX -->
+  <script>
+    function getCookie(n){const m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?m.pop():""}
+    document.addEventListener("htmx:configRequest",e=>{e.detail.headers['X-CSRFToken']=getCookie('csrftoken')});
+  </script>
+
+  {% block head_extra %}{% endblock %}
+</head>
+<body class="h-full bg-slate-50 text-slate-900">
+
+  <!-- Fixed Top Bar (56px = h-14) -->
+  <header class="sticky top-0 z-50 h-14 border-b bg-white/90 backdrop-blur">
+    <div class="mx-auto max-w-7xl h-full px-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <!-- Flowbite drawer toggle -->
+        <a href="/" class="text-lg font-semibold">Calorie Tracker</a>
+      </div>
+      <nav class="hidden md:flex items-center gap-3 text-sm">
+        {% block topbar_right %}{% endblock %}
+      </nav>
+    </div>
+  </header>
+
+  <!-- Flowbite Drawer Sidebar (offset below header) -->
+  <aside id="mainSidebar"
+         tabindex="-1"
+         aria-labelledby="mainSidebarLabel"
+         data-drawer-backdrop="false"
+         data-drawer-placement="left"
+         class="fixed left-0 top-14 z-40 w-64 h-[calc(100vh-3.5rem)] overflow-y-auto border-r bg-white
+                transition-transform -translate-x-full md:translate-x-0">
+    <div class="px-3 py-4">
+      <h2 id="mainSidebarLabel" class="sr-only">Sidebar</h2>
+        <a href="/" class="block px-3 py-2 hover:bg-slate-100">Home</a>
+        <a href="/demo" class="block px-3 py-2 hover:bg-slate-100">Demo</a>
+        <a href="/aboutUs" class="block px-3 py-2 hover:bg-slate-100">About Us</a>
+    </div>
+  </aside>
+
+  <!-- Main content; shifted on desktop to clear fixed sidebar -->
+  <div class="mx-auto max-w-7xl md:ml-64 min-h-screen">
+    <main id="main-content" class="p-4">
+      {% block header_actions %}{% endblock %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <!-- Footer; align with main shift on desktop -->
+  <footer class="border-t bg-white text-sm text-slate-500 p-4 text-center md:ml-64">
+    {% block footer %}Calorie Tracker © 2025{% endblock %}
+  </footer>
+
+  {% block scripts_extra %}{% endblock %}
+
+  <!-- Flowbite at end so DOM exists -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.min.js"></script>
+</body>
+</html>
