@@ -1,10 +1,15 @@
 # Create your views here.
+import logging
+
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
 
+logger = logging.getLogger(__name__)
+
 
 def healthz(request):
+    logger.inf("healthz api check done")
     return JsonResponse("All ok!")
 
 
