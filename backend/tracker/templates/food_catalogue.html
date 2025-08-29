@@ -1,0 +1,91 @@
+{# templates/tracker/catalogue.html #}
+{% extends "base.html" %}
+{% block title %}Food Catalogue{% endblock %}
+{% block content %}
+<div class="space-y-6">
+
+  <!-- Search + add -->
+  <section class="rounded-2xl border bg-white p-6 shadow-sm">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <h2 class="text-lg font-semibold">Food Catalogue</h2>
+        <p class="text-sm text-slate-600">Search local items first; fallback to LLM when needed.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <input id="food-q" type="text" placeholder="Search: 'boiled egg', 'idli', …"
+               class="w-72 max-w-[70vw] rounded-lg border px-3 py-2 text-sm">
+        <button
+          class="rounded-lg border px-3 py-2 text-sm"
+          hx-include="#food-q"
+          hx-target="#catalogue-results"
+          hx-swap="innerHTML"
+        >
+          Search
+        </button>
+        <button
+          class="rounded-lg border px-3 py-2 text-sm"
+          hx-include="#food-q"
+          hx-target="#catalogue-results"
+          hx-swap="afterbegin"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="rounded-2xl border bg-white p-6 shadow-sm">
+    <div id="catalogue-results" class="overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead class="text-xs uppercase text-slate-500">
+          <tr>
+            <th class="py-2 pr-3">Food</th>
+            <th class="py-2 pr-3">Per</th>
+            <th class="py-2 pr-3">Kcal</th>
+            <th class="py-2 pr-3">Protein</th>
+            <th class="py-2 pr-3">Carb</th>
+            <th class="py-2 pr-3">Fat</th>
+            <th class="py-2 pr-3"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y">
+          <tr>
+            <td class="py-2 pr-3 font-medium">Boiled Egg</td>
+            <td class="py-2 pr-3">1 egg (50g)</td>
+            <td class="py-2 pr-3">78</td>
+            <td class="py-2 pr-3">6 g</td>
+            <td class="py-2 pr-3">0.6 g</td>
+            <td class="py-2 pr-3">5 g</td>
+            <td class="py-2 pr-3">
+              <button
+                class="rounded border px-2 py-1 text-xs"
+                hx-vals='{"food_id": 1, "meal": "breakfast"}'
+              >
+                Add to Diary
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-3 font-medium">Idli</td>
+            <td class="py-2 pr-3">1 pc (40g)</td>
+            <td class="py-2 pr-3">58</td>
+            <td class="py-2 pr-3">2 g</td>
+            <td class="py-2 pr-3">12 g</td>
+            <td class="py-2 pr-3">0.4 g</td>
+            <td class="py-2 pr-3">
+              <button
+                class="rounded border px-2 py-1 text-xs"
+                hx-vals='{"food_id": 2, "meal": "lunch"}'
+              >
+                Add to Diary
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

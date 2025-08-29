@@ -1,0 +1,69 @@
+{# templates/tracker/dashboard.html #}
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="space-y-6">
+
+  <!-- KPI cards -->
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="rounded-2xl border bg-white p-5">
+      <div class="text-xs uppercase text-slate-500">Calorie Goal</div>
+      <div class="mt-2 text-2xl font-semibold" id="kpi-goal">2,100 kcal</div>
+    </div>
+    <div class="rounded-2xl border bg-white p-5">
+      <div class="text-xs uppercase text-slate-500">Consumed</div>
+      <div class="mt-2 text-2xl font-semibold" id="kpi-consumed">1,240 kcal</div>
+    </div>
+    <div class="rounded-2xl border bg-white p-5">
+      <div class="text-xs uppercase text-slate-500">Remaining</div>
+      <div class="mt-2 text-2xl font-semibold" id="kpi-remaining">860 kcal</div>
+    </div>
+    <div class="rounded-2xl border bg-white p-5">
+      <div class="text-xs uppercase text-slate-500">Protein</div>
+      <div class="mt-2 text-2xl font-semibold" id="kpi-protein">78 g</div>
+    </div>
+  </section>
+
+  <!-- 7-day trend -->
+  <section class="rounded-2xl border bg-white p-6 shadow-sm">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-semibold">Last 7 Days</h2>
+      <div class="text-xs text-slate-500">Goal vs. Consumed</div>
+    </div>
+    <div class="mt-4 h-56 rounded-xl border border-dashed flex items-center justify-center text-sm text-slate-500">
+      Chart placeholder
+    </div>
+  </section>
+
+  <!-- Recent entries -->
+  <section class="rounded-2xl border bg-white p-6 shadow-sm">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-semibold">Recent Entries</h2>
+      <a href="/diary" class="text-sm underline">Open diary</a>
+    </div>
+    <div class="mt-4 divide-y text-sm">
+      <div class="py-3 flex items-center justify-between">
+        <div>
+          <div class="font-medium">Breakfast • Oats + Milk</div>
+          <div class="text-slate-500">Today • 320 kcal</div>
+        </div>
+        <div class="text-right">
+          <div>Protein 14g</div>
+          <div class="text-slate-500 text-xs">Carb 45g • Fat 8g</div>
+        </div>
+      </div>
+      <div class="py-3 flex items-center justify-between">
+        <div>
+          <div class="font-medium">Lunch • Paneer Bowl</div>
+          <div class="text-slate-500">Today • 520 kcal</div>
+        </div>
+        <div class="text-right">
+          <div>Protein 35g</div>
+          <div class="text-slate-500 text-xs">Carb 30g • Fat 22g</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

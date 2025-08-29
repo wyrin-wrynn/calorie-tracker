@@ -1,20 +1,32 @@
 # Create your views here.
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.utils.timezone import now
+from django.utils import timezone
 
 
 def healthz(request):
     return JsonResponse("All ok!")
 
 
-def demo(request):
-    return render(request, "demo.html")
+def home(request):
+    return render(request, "home.html")
 
 
-def demo_ping(request):
-    ctx = {"ts": now()}
-    return render(request, "partials/ping.html", ctx)
+def dashboard(request):
+    return render(request, "dashboard.html")
+
+
+def diary(request):
+    meals = ["Breakfast", "Lunch", "Supper", "Dinner"]
+    ctx = {
+        "meals": meals,
+        "today": timezone.localdate(),
+    }
+    return render(request, "diary.html", ctx)
+
+
+def food_catalogue(request):
+    return render(request, "food_catalogue.html")
 
 
 def aboutUs(request):

@@ -11,7 +11,6 @@
       <div class="flex items-center gap-3">
         <button
           class="px-4 py-2 rounded-xl border bg-slate-900 text-white text-sm"
-          hx-get="{% url 'demo_ping' %}"
           hx-target="#replace-target"
           hx-swap="innerHTML"
         >
@@ -27,7 +26,6 @@
       <p class="text-sm text-slate-600 mb-4">Each click prepends a new item at the top.</p>
       <button
         class="px-4 py-2 rounded-xl border text-sm"
-        hx-get="{% url 'demo_ping' %}"
         hx-target="#prepend-target"
         hx-swap="afterbegin"
       >
@@ -62,7 +60,6 @@
         </button>
         <button
           class="px-4 py-2 rounded-xl border text-sm"
-          hx-get="{% url 'demo_ping' %}"
           hx-target="#modal-body"
           hx-swap="innerHTML"
         >
